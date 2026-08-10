@@ -1,0 +1,13 @@
+* {
+   color: rgb(48, 48, 48);
+   background-color: rgb(242, 225, 188);
+   font-family: monospace;
+}
+
+p {
+   font-size: 1em;
+}
+
+img {
+    width: 35%;
+}
