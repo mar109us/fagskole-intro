@@ -11,10 +11,11 @@ p {
 
 img {
    width: 40%;
-   border: 0.5rem dashed black;
+   border: 0.5rem dashed rgb(65, 63, 46);
 }
 
 .container {
+   border-radius: 1rem;
    border: 2px solid black;
    min-width: 10%;
    max-width: 50%;
