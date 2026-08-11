@@ -23,7 +23,7 @@ body {
 }
 
 .menu {
-   width: 30%;
+   width: 20%;
 }
 
 .content {
@@ -64,9 +64,14 @@ body {
    width: 25%;
 }
 
+.width-33 {
+   width: 33.33%;
+}
+
 .container {
    border: 1px solid black;
    margin: 1em;
    background-color: beige;
    border-radius: 1em;
+   height: 33%;
 }
