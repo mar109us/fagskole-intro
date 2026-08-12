@@ -1,5 +1,9 @@
 let light = document.getElementById('light')
 
+let redLight = document.getElementById('red-light')
+let yellowLight = document.getElementById('yellow-light')
+let greenLight = document.getElementById('green-light')
+
 let count = 1
 
 light.addEventListener("click",() => {
@@ -10,4 +14,26 @@ light.addEventListener("click",() => {
    else {
       count++
    }
+
+   checkState(count)
 })
+
+function checkState(currentState) {
+   if (currentState === 1) {
+      redLight.style.backgroundColor = "red"
+      yellowLight.style.backgroundColor = "red"
+      greenLight.style.backgroundColor = "red"
+   }
+   if (currentState === 2) {
+      
+   }
+   if (currentState === 3) {
+      
+   }
+   if (currentState === 4) {
+      
+   }
+   if (currentState === 5) {
+      
+   }
+}
