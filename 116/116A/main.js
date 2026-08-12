@@ -1,12 +1,100 @@
-containerNumber = document.getElementById("container-number")
+containerNumber = document.getElementById("container-number");
 
-console.log(containerNumber)
+console.log(containerNumber);
 
 function show1() {
-    containerNumber.innerHTML = `
+   containerNumber.innerHTML = `
         <h1>1</h1>
         <button onclick="show2()">Øke med én</button>
         <button onclick="show2()">Doble</button>
     `;
 }
-show1()
+show1();
+
+function show2() {
+   containerNumber.innerHTML = `
+        <h1>2</h1>
+        <button onclick="show3()">Øke med én</button>
+        <button onclick="show4()">Doble</button>
+    `;
+}
+
+function show3() {
+   containerNumber.innerHTML = `
+        <h1>3</h1>
+        <button onclick="show4()">Øke med én</button>
+        <button onclick="show6()">Doble</button>
+    `;
+}
+
+function show4() {
+   containerNumber.innerHTML = `
+        <h1>4</h1>
+        <button onclick="show5()">Øke med én</button>
+        <button onclick="show8()">Doble</button>
+    `;
+}
+
+function show5() {
+   containerNumber.innerHTML = `
+        <h1>5</h1>
+        <button onclick="show6()">Øke med én</button>
+        <button onclick="show10()">Doble</button>
+    `;
+}
+
+function show6() {
+   containerNumber.innerHTML = `
+        <h1>6</h1>
+        <button onclick="show7()">Øke med én</button>
+        <button onclick="show12()">Doble</button>
+    `;
+}
+
+function show7() {
+   containerNumber.innerHTML = `
+        <h1>7</h1>
+        <button onclick="show8()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
+
+function show8() {
+   containerNumber.innerHTML = `
+        <h1>8</h1>
+        <button onclick="show9()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
+
+function show9() {
+   containerNumber.innerHTML = `
+        <h1>9</h1>
+        <button onclick="show10()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
+
+function show10() {
+   containerNumber.innerHTML = `
+        <h1>10</h1>
+        <button onclick="show11()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
+
+function show11() {
+   containerNumber.innerHTML = `
+        <h1>11</h1>
+        <button onclick="show12()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
+
+function show12() {
+   containerNumber.innerHTML = `
+        <h1>12</h1>
+        <button onclick="show1()">Øke med én</button>
+        <button onclick="show1()">Doble</button>
+    `;
+}
