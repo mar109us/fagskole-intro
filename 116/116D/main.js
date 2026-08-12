@@ -8,7 +8,7 @@ let count = 1;
 
 light.addEventListener("click", () => {
    console.log(count);
-   if (count === 5) {
+   if (count === 4) {
       count = 1;
    } else {
       count++;
@@ -24,12 +24,19 @@ function checkState(currentState) {
       greenLight.style.backgroundColor = "gray";
    }
    if (currentState === 2) {
+      redLight.style.backgroundColor = "red";
+      yellowLight.style.backgroundColor = "yellow";
+      greenLight.style.backgroundColor = "gray";
    }
    if (currentState === 3) {
+      redLight.style.backgroundColor = "gray";
+      yellowLight.style.backgroundColor = "gray";
+      greenLight.style.backgroundColor = "green";
    }
    if (currentState === 4) {
-   }
-   if (currentState === 5) {
+      redLight.style.backgroundColor = "gray";
+      yellowLight.style.backgroundColor = "yellow";
+      greenLight.style.backgroundColor = "gray";
    }
 }
 checkState(count)
