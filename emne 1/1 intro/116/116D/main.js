@@ -13,7 +13,7 @@ light.addEventListener("click", () => {
    } else {
       count++;
    }
-
+   
    checkState(count);
 });
 
