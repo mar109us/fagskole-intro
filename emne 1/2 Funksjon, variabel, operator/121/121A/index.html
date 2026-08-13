@@ -38,13 +38,13 @@
          const circleBackgroundColor =
             document.getElementById("select-bg-color");
 
+         const inputXPosition = document.getElementById("input-x-position");
+         const inputYPosition = document.getElementById("input-y-position");
+
          circleBackgroundColor.addEventListener("change", (colorSelected) => {
             console.log(colorSelected.target.value);
             changeCircleBackground(colorSelected.target.value);
          });
-
-         const inputXPosition = document.getElementById("input-x-position");
-         const inputYPosition = document.getElementById("input-y-position");
 
          function changeCircleBackground(color) {
             console.log(color);
