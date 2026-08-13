@@ -6,8 +6,19 @@
       <title>Document</title>
    </head>
    <body>
-      <input type="number" name="" id="input-x-position">
-      <button onclick="addCircleFromInput()">Create circle</button>
+      Color background <br />
+      <select name="" id="">
+         <option value="red">red</option>
+         <option value="green">green</option>
+         <option value="blue">blue</option>
+      </select>
+      <br />
+      Horizontal position <br />
+      <input type="number" id="input-x-position" />
+      <br />
+      Vertical position <br />
+      <input type="number" id="input-y-position" />
+      <button onclick="addCircleFromInput()">Update circle</button>
       <br />
       <svg
          id="mySvg"
@@ -16,16 +27,17 @@
          style="background-color: lightgray"
       ></svg>
       <script>
-         const inputXPosition = document.getElementById("input-x-position")
+         const inputXPosition = document.getElementById("input-x-position");
+         const inputYPosition = document.getElementById("input-y-position");
          function addCircleFromInput() {
-            addCircle(inputXPosition.value)
+            addCircle(inputXPosition.value, inputYPosition.value);
          }
-         function addCircle(xPosition) {
+         function addCircle(xPosition, yPosition) {
             document.getElementById("mySvg").innerHTML = /*HTML*/ `
-          <circle cx="${xPosition}" cy="100" r="40" stroke="green" stroke-width="4" fill="yellow" />            
+          <circle cx="${xPosition}" cy="${yPosition}" r="40" stroke="green" stroke-width="4" fill="yellow" />            
       `;
          }
-         
+         addCircle(80,80)
       </script>
    </body>
 </html>
