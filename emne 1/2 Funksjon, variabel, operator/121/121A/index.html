@@ -14,10 +14,10 @@
       </select>
       <br />
       Horizontal position <br />
-      <input type="number" placeholder="80" id="input-x-position" />
+      <input type="number" value="80" id="input-x-position" />
       <br />
       Vertical position <br />
-      <input type="number" placeholder="80" id="input-y-position" />
+      <input type="number" value="80" id="input-y-position" />
       <button onclick="addCircleFromInput()">Update circle</button>
       <br />
       <svg
@@ -27,26 +27,48 @@
          style="background-color: lightgray"
       ></svg>
       <script>
-         const circleBackgroundColor = document.getElementById("select-bg-color")
-         
+         let initXPos = 80;
+         let initYPos = 80;
+         let initBackgroundColor = "red";
+
+         let currentXPos = initXPos;
+         let currentYPos = initYPos;
+         let currentBackgroundColor = initBackgroundColor;
+
+         const circleBackgroundColor =
+            document.getElementById("select-bg-color");
+
          circleBackgroundColor.addEventListener("change", (colorSelected) => {
-            console.log(colorSelected.target.value)
-         })
+            console.log(colorSelected.target.value);
+            changeCircleBackground(colorSelected.target.value);
+         });
 
          const inputXPosition = document.getElementById("input-x-position");
          const inputYPosition = document.getElementById("input-y-position");
+
          function changeCircleBackground(color) {
             console.log(color);
+            addCircle(inputXPosition.value, inputYPosition.value, color);
          }
+
          function addCircleFromInput() {
-            addCircle(inputXPosition.value, inputYPosition.value);
+            addCircle(
+               inputXPosition.value,
+               inputYPosition.value,
+               currentBackgroundColor,
+            );
          }
-         function addCircle(xPosition, yPosition) {
+
+         function addCircle(xPosition, yPosition, fill) {
+            currentXPos = xPosition;
+            currentYPos = yPosition;
+            currentBackgroundColor = fill;
+
             document.getElementById("mySvg").innerHTML = /*HTML*/ `
-          <circle cx="${xPosition}" cy="${yPosition}" r="40" stroke="green" stroke-width="4" fill="yellow" />            
+          <circle cx="${xPosition}" cy="${yPosition}" r="40" stroke="green" stroke-width="4" fill="${fill}" />            
       `;
          }
-         addCircle(80, 80);
+         addCircle(currentXPos, currentYPos, currentBackgroundColor);
       </script>
    </body>
 </html>
