@@ -7,7 +7,7 @@
    </head>
    <body>
       Color background <br />
-      <select name="" id="">
+      <select id="select-bg-color">
          <option value="red">red</option>
          <option value="green">green</option>
          <option value="blue">blue</option>
@@ -27,8 +27,17 @@
          style="background-color: lightgray"
       ></svg>
       <script>
+         const circleBackgroundColor = document.getElementById("select-bg-color")
+         
+         circleBackgroundColor.addEventListener("change", (colorSelected) => {
+            console.log(colorSelected.target.value)
+         })
+
          const inputXPosition = document.getElementById("input-x-position");
          const inputYPosition = document.getElementById("input-y-position");
+         function changeCircleBackground(color) {
+            console.log(color);
+         }
          function addCircleFromInput() {
             addCircle(inputXPosition.value, inputYPosition.value);
          }
@@ -37,7 +46,7 @@
           <circle cx="${xPosition}" cy="${yPosition}" r="40" stroke="green" stroke-width="4" fill="yellow" />            
       `;
          }
-         addCircle(80,80)
+         addCircle(80, 80);
       </script>
    </body>
 </html>
