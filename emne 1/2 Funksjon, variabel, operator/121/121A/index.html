@@ -25,7 +25,8 @@
       <br />
       Vertical position <br />
       <input type="number" value="80" id="input-y-position" />
-      <button onclick="addCircleFromInput()">Update circle</button>
+      <button onclick="addCircleFromInput()">Update position</button> <br />
+      <button id="change-shape" onclick="addSquare()">Make square</button>
       <br />
       <svg
          id="mySvg"
@@ -99,6 +100,12 @@
             currentBackgroundColor,
             currentBorderColor,
          );
+
+         function addSquare() {
+            document.getElementById("mySvg").innerHTML = `
+          <rect x="50" y="50" width="80" height="80" stroke="blue" stroke-width="4" fill="red" />            
+      `;
+         }
       </script>
    </body>
 </html>
