@@ -28,3 +28,7 @@ mainContent.innerHTML = `
          </tr>
       </table>
 `
+
+function showContent() {
+   
+}
