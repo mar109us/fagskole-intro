@@ -9,3 +9,7 @@ function writeSpace() {
 function writeLineBreak() {
    document.getElementById("output").innerText += "\n";
 }
+
+for(index = 0; index<10 ; index++) {
+   writeHash()
+}
