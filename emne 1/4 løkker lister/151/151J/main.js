@@ -40,38 +40,42 @@ function countSpaces(data) {
 }
 
 function findLongestWord(data) {
-   let wordStart = null;
-   let wordCount = null;
-   let currentWord = null;
-   let longestWord = null;
+   let startWord = null;
+   let countCharacters = null;
+   let currentWordLength = null;
+   let longestWordLength = null;
+   let currentSavedWord = ""
+   let previousSavedWord = ""
+   
    for (i = 0; i < data.length; i++) {
-      wordCount++;
-
-      if (data.charCodeAt(i) !== 32 && wordStart === null) {
-         wordStart = i;
+      countCharacters++;
+      if (data.charCodeAt(i) !== 32 && startWord === null) {
+         startWord = i;
+         currentSavedWord += data.charAt(i)
+      }
+      if (data.charCodeAt(i) !== 32) {
+         currentSavedWord += data.charAt(i)
       }
       if (i === data.length - 1) {
-         currentWord = wordCount;
-
-         wordStart = i;
-         wordCount = null;
+         currentWordLength = countCharacters;
+         startWord = i;
+         countCharacters = null;
       }
-
-      if (data.charCodeAt(i) === 32 && wordCount !== null) {
-         currentWord = wordCount - 1;
-
-         wordStart = i;
-         wordCount = null;
+      if (data.charCodeAt(i) === 32 && countCharacters !== null) {
+         currentWordLength = countCharacters - 1;
+         startWord = i;
+         countCharacters = null;
       }
-      if (currentWord > longestWord) {
-         longestWord = currentWord;
-         currentWord = null;
+      if (currentWordLength > longestWordLength) {
+         longestWordLength = currentWordLength;
+         currentWordLength = null;
 
-         console.log("mew2");
+         previousSavedWord = currentSavedWord
+         currentSavedWord = ""
       }
    }
-   if (longestWord === null) {
-      longestWord = data.length;
+   if (longestWordLength === null) {
+      longestWordLength = data.length;
    }
-   return longestWord;
+   return `${longestWordLength} (${currentSavedWord})`;
 }
