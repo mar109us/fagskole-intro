@@ -40,28 +40,38 @@ function countSpaces(data) {
 }
 
 function findLongestWord(data) {
-   let count = 0;
    let wordStart = null;
-   let wordEnd = null;
+   let wordCount = null;
+   let currentWord = null;
    let longestWord = null;
    for (i = 0; i < data.length; i++) {
-      if (data.charCodeAt(i) === 32) {
-         count++;
-      }
+      wordCount++;
+
       if (data.charCodeAt(i) !== 32 && wordStart === null) {
          wordStart = i;
-         console.log(wordStart);
       }
-      if (data.charCodeAt(i) === 32 && wordEnd === null) {
-         wordEnd = i;
-         console.log(wordEnd);
+      if (i === data.length - 1) {
+         currentWord = wordCount;
+
+         wordStart = i;
+         wordCount = null;
       }
-      if (wordEnd - wordStart < longestWord) {
-         longestWord = wordEnd - wordStart;
-         console.log("asd", longestWord);
-         wordStart = null;
-         wordEnd = null;
+
+      if (data.charCodeAt(i) === 32 && wordCount !== null) {
+         currentWord = wordCount - 1;
+
+         wordStart = i;
+         wordCount = null;
       }
+      if (currentWord > longestWord) {
+         longestWord = currentWord;
+         currentWord = null;
+
+         console.log("mew2");
+      }
+   }
+   if (longestWord === null) {
+      longestWord = data.length;
    }
    return longestWord;
 }
