@@ -15,7 +15,7 @@ function updateView(data) {
       document.getElementById("output").innerHTML += `
       <ul>
          <li>Words: ${countSpaces(data)}</li>
-         <li>Longest word: ${countSpaces(data)}</li>
+         <li>Longest word: ${findLongestWord(data)}</li>
       <ul>
       `;
    }
@@ -35,6 +35,33 @@ function countSpaces(data) {
          count++;
       }
    }
-   let lastCharacterProbablyNotSpace = 1
+   let lastCharacterProbablyNotSpace = 1;
    return count + lastCharacterProbablyNotSpace;
+}
+
+function findLongestWord(data) {
+   let count = 0;
+   let wordStart = null;
+   let wordEnd = null;
+   let longestWord = null;
+   for (i = 0; i < data.length; i++) {
+      if (data.charCodeAt(i) === 32) {
+         count++;
+      }
+      if (data.charCodeAt(i) !== 32 && wordStart === null) {
+         wordStart = i;
+         console.log(wordStart);
+      }
+      if (data.charCodeAt(i) === 32 && wordEnd === null) {
+         wordEnd = i;
+         console.log(wordEnd);
+      }
+      if (wordEnd - wordStart < longestWord) {
+         longestWord = wordEnd - wordStart;
+         console.log("asd", longestWord);
+         wordStart = null;
+         wordEnd = null;
+      }
+   }
+   return longestWord;
 }
