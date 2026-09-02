@@ -1,50 +1,3 @@
-// 151J
-// Les input
-// Tell antall ord
-// Finn det lengste ordet
-// Finn ord med flest vokaler
-
-const output = document.getElementById("output");
-
-updateView();
-function updateView(data) {
-   initView();
-   if (data) {
-      output.innerHTML += `
-         <h1>${data}</h1>
-         ${displayData(data)}
-      `;
-   }
-}
-
-function initView() {
-   return (output.innerHTML = `
-   <input type="text" onchange="updateView(this.value)">
-   <button type="submit" onclick="initView()">reset</button>
-   `);
-}
-
-function displayData(data) {
-   return `
-      <ul>
-         <li>Words: ${countSpaces(data)}</li>
-         <li>Longest: ${findLongestWord(data)}</li>
-         <li>Vocals: ${findVocalWord(data)}</li>
-      <ul>
-   `;
-}
-
-function countSpaces(data) {
-   let count = 0;
-   for (let i = 0; i < data.length; i++) {
-      if (data.charCodeAt(i) === 32) {
-         count++;
-      }
-   }
-   let lastCharacterProbablyNotSpace = 1;
-   return count + lastCharacterProbablyNotSpace;
-}
-
 function findLongestWord(data) {
    let startWord = null;
    let countCharacters = null;
@@ -90,16 +43,4 @@ function findWordEnd(data, i, countCharacters) {
    if (data.charCodeAt(i) === 32 && countCharacters !== null) {
       return true;
    }
-}
-
-function findVocalWord(data) {
-   let vocal = ["a", "e", "i", "o", "u", "y"];
-   let vocalCount = 0;
-
-   for (let i = 0; i < data.length; i++) {
-      if (vocal.includes(data.charAt(i))) {
-         vocalCount++;
-      }
-   }
-   return vocalCount;
 }
