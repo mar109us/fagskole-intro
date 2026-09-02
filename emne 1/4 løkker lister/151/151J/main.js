@@ -45,7 +45,7 @@ function findLongestWord(data) {
    let countCharacters = null;
    let currentWordLength = null;
    let longestWordLength = null;
-   
+
    for (i = 0; i < data.length; i++) {
       countCharacters++;
       if (data.charCodeAt(i) !== 32 && startWord === null) {
@@ -73,12 +73,13 @@ function findLongestWord(data) {
 }
 
 function findVocalWord(data) {
-   let vocal = [a, e, i, o, u, y]
-   let vocalCount = null
+   let vocal = ["a", "e", "i", "o", "u", "y"];
+   let vocalCount = 0;
 
-   for (i = 0; i < data.length; i++) {
-      
+   for (let i = 0; i < data.length; i++) {
+      if (vocal.includes(data.charAt(i))) {
+         vocalCount++;
+      }
    }
-
-
+   return vocalCount;
 }
