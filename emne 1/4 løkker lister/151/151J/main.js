@@ -31,7 +31,7 @@ function initView() {
 
 function countSpaces(data) {
    let count = 0;
-   for (i = 0; i < data.length; i++) {
+   for (let i = 0; i < data.length; i++) {
       if (data.charCodeAt(i) === 32) {
          count++;
       }
@@ -46,7 +46,7 @@ function findLongestWord(data) {
    let currentWordLength = null;
    let longestWordLength = null;
 
-   for (i = 0; i < data.length; i++) {
+   for (let i = 0; i < data.length; i++) {
       countCharacters++;
       if (data.charCodeAt(i) !== 32 && startWord === null) {
          startWord = i;
