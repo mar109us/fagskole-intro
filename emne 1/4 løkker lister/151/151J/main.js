@@ -15,7 +15,8 @@ function updateView(data) {
       document.getElementById("output").innerHTML += `
       <ul>
          <li>Words: ${countSpaces(data)}</li>
-         <li>Longest word: ${findLongestWord(data)}</li>
+         <li>Longest: ${findLongestWord(data)}</li>
+         <li>Vocals: ${findVocalWord(data)}</li>
       <ul>
       `;
    }
@@ -44,17 +45,11 @@ function findLongestWord(data) {
    let countCharacters = null;
    let currentWordLength = null;
    let longestWordLength = null;
-   let currentSavedWord = ""
-   let previousSavedWord = ""
    
    for (i = 0; i < data.length; i++) {
       countCharacters++;
       if (data.charCodeAt(i) !== 32 && startWord === null) {
          startWord = i;
-         currentSavedWord += data.charAt(i)
-      }
-      if (data.charCodeAt(i) !== 32) {
-         currentSavedWord += data.charAt(i)
       }
       if (i === data.length - 1) {
          currentWordLength = countCharacters;
@@ -69,13 +64,21 @@ function findLongestWord(data) {
       if (currentWordLength > longestWordLength) {
          longestWordLength = currentWordLength;
          currentWordLength = null;
-
-         previousSavedWord = currentSavedWord
-         currentSavedWord = ""
       }
    }
    if (longestWordLength === null) {
       longestWordLength = data.length;
    }
-   return `${longestWordLength} (${currentSavedWord})`;
+   return longestWordLength;
+}
+
+function findVocalWord(data) {
+   let vocal = [a, e, i, o, u, y]
+   let vocalCount = null
+
+   for (i = 0; i < data.length; i++) {
+      
+   }
+
+
 }
