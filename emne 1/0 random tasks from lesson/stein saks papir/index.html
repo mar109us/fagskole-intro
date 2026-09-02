@@ -1,16 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>!Rock || !Paper || !Scizor me</title>
-</head>
-<body>
-   
-   
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>!Rock || !Paper || !Scizor me</title>
+      <style>
+         * {
+            box-sizing: border-box;
+         }
+         img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border: 3px solid black;
+            border-radius: 10px;
+         }
+         button {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            border: none;
+            background-color: transparent;
+            img:hover {
+               border: 5px solid black;
+            }
+         }
+         .result {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            gap: 50px;
+            img {
+               width: 200px;
+               height: 200px;
+            }
+         }
+         .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+         #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="app"></div>
+      <script>
+         const state = {
+            computer: getRandomNumber(),
+            player: null,
+            winner: null,
+            computerImg: null,
+            playerImg: null,
+         };
 
-   <script>
-      let 
-   </script>
-</body>
+         const img = [
+            `<img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Dwayne_Johnson-1809_%28cropped%29.jpg?utm_source=no.wikipedia.org&utm_campaign=index&utm_content=original">`,
+            `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Geneva%2C_Bodmer_Lab_Ms_Papyrus_66_%28P.Bodmer_II_-_PB_2%29_fol._1r.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original">`,
+            `<img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-legends/9/9c/Scizor.jpg?width=364&format=jpg&auto=webp&quality=80">`,
+         ];
+
+         const app = document.getElementById("app");
+
+         updateView();
+
+         function updateView() {
+            if (state.winner != null) {
+               app.innerHTML = initView() + display();
+            } else {
+               app.innerHTML = initView();
+            }
+         }
+
+         function display() {
+            console.log(state.playerImg);
+
+            return `
+            <div class="result">
+               <div class="column">
+                  <h1>YOU</h1>
+                  ${state.playerImg}
+               </div>
+               <h1>VS</h1>
+               <div class="column">
+                  <h1>COMPUTER</h1>
+                  ${state.computerImg}
+               </div>
+            </div>
+            <h1>${state.winner}</h1>
+               `;
+         }
+
+         function initView() {
+            return `
+            <div>
+               <button value="1" onclick="getWinner(this.value, state.computer)">${img[0]}</button>
+               <button value="2" onclick="getWinner(this.value, state.computer)">${img[1]}</button>
+               <button value="3" onclick="getWinner(this.value, state.computer)">${img[2]}</button>
+            </div>
+               `;
+         }
+
+         function getWinner(player, computer) {
+            state.winner = null;
+            state.computer = getRandomNumber();
+            state.computerImg = img[computer - 1];
+            state.playerImg = img[player - 1];
+            if (player == computer) {
+               state.winner = "DRAW";
+            } else if ((player == 1 && computer == 3) || (player == 2 && computer == 1) || (player == 3 && computer == 2)) {
+               state.winner = "YOU WON";
+            } else {
+               state.winner = "COMPUTER WON";
+            }
+            updateView();
+         }
+
+         function getRandomNumber() {
+            return Math.floor(Math.random() * 3) + 1;
+         }
+      </script>
+   </body>
 </html>
