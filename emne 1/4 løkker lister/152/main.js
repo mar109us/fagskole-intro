@@ -31,4 +31,23 @@ med hvert sjuende tall fra 100 til 1000,
 
 /* 
 152 B  
-Lag en funksjon som tar en liste av tall som parameter og som returnerer summen av tallene. */
+Lag en funksjon som tar en liste av tall som parameter 
+funksjonen returnerer summen av tallene. */
+
+
+const app = document.getElementById("app");
+const numbers = [1, 2, 135, 3, 55555, 35]
+
+
+updateView();
+function updateView() {
+   app.innerHTML += combineValue(numbers);
+}
+
+function combineValue(numbers) {
+   let sum = null
+   for (let i of numbers) {
+      sum += i
+   }
+   return sum
+}
