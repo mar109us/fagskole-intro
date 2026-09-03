@@ -4,6 +4,29 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
+   <style>
+      * {
+         box-sizing: border-box;
+      }
+      #app {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         width: 90vw;
+         height: 90vh;
+      }
+      #square {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         flex: 1;
+         
+         min-width: 33%;
+         min-height: 33%;
+         border: 2px solid black;
+      }
+   </style>
 </head>
 <body>
    
@@ -19,7 +42,32 @@ bruk array
 
 <script>
 const app = document.getElementById("app")
+let squareIndex = [1, 2, 3, 4, 5, 6, 7, 8, null]
+let squareStart = `<div id="square">`
+let setValue = ` value="`
+let finish
+let squareEnd = `</div>`
 
+function updateView() {
+app.innerHTML = drawBoard()
+}
+updateView()
+
+function drawBoard() {
+   let returnString = ""
+   for (let i of squareIndex) {
+      returnString += `
+         <div onclick="updatePositions(${i})" id="square">
+            <h1>${i}</h1>
+         </div>
+      `
+   }
+   return returnString
+}
+
+function updatePositions(numberToMove) {
+
+}
 
 </script>
 </html>
