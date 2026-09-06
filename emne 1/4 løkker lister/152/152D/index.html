@@ -3,10 +3,9 @@ Lag en nettside hvor brukeren kan lime inn en lengre tekst
 knapp for å få telt opp hvor mange det er av hvert ord. 
 
 Rens teksten for alt annet enn tegnene A-Z, Æ, Ø og Å
- i store og små bokstaver, 
- mellomrom. 
- Bruk en løkke til å gå gjennom alle bokstavene 
- kopier bare bokstaver over i en ny tekst.
+i store og små bokstaver, mellomrom. 
+Bruk en løkke til å gå gjennom alle bokstavene 
+kopier bare bokstaver over i en ny tekst.
 
 Bruk text.split(' ') til å dele opp en tekst i en liste av ord.
 
@@ -29,14 +28,64 @@ samtidig i en løkke og viser hvor mange det forekomster
 det var av hvert ord. 
 -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-</head>
-<body>
-   
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <div id="app"></div>
+      <script>
+         const app = document.getElementById("app");
+         let textContent = "";
+         let allWords = [];
+
+         let words = [];
+         let wordsCount = [];
+
+         function updateView() {
+            app.innerHTML = input();
+         }
+         updateView();
+
+         function input() {
+            return `
+               <textarea onchange="cleanText(this.value)"></textarea>
+               <button onclick="updateView()">check text</button>
+               <p>${allWords}</p>
+            `;
+         }
+
+         function cleanText(text) {
+            textContent = text;
+
+            textToLowerCase();
+            splitText();
+            removeDuplicates();
+         }
+
+         function textToLowerCase() {
+            textContent = textContent.toLowerCase();
+         }
+
+         function splitText() {
+            allWords = textContent.split(" ");
+         }
+
+         function removeDuplicates() {
+            for (let i of allWords) {
+               if (words.includes(i)) {
+               } else {
+                  words.push(i)
+                  wordsCount.push(1)
+                  console.log(i);
+                  console.log(words);
+                  console.log(wordsCount);
+               }
+            }
+         }
+      </script>
+   </body>
 </html>
