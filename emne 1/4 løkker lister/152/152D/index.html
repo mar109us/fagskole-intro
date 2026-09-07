@@ -52,7 +52,7 @@ det var av hvert ord.
 
          .input {
             width: 100%;
-            height: 30%;
+            height: 10%;
             textarea {
                width: 80%;
             }
@@ -65,9 +65,10 @@ det var av hvert ord.
             width: 100%;
             margin-top: 10px;
             align-items: center;
+            justify-content: center;
          }
 
-         #text-output {
+         .text-output {
             display: flex;
             width: 100%;
             justify-content: space-between;
@@ -79,6 +80,8 @@ det var av hvert ord.
          #piechart {
             padding: 0px;
             margin: 0px;
+            height: 100vh;
+            width: 100%;
          }
 
          .seperator {
@@ -106,6 +109,421 @@ det var av hvert ord.
          let textContent = "";
          let allWords = [];
          let allowedCharacters = [" ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "æ", "ø", "å"];
+         let trashWords = [
+            "",
+            " ",
+            "og",
+            "i",
+            "på",
+            "denne",
+            "beste",
+            "ukas",
+            "dinside",
+            "dinsides",
+            "uka",
+            "illustrasjon",
+            "til",
+            "er",
+            "e",
+            "det",
+            "av",
+            "kan",
+            "at",
+            "med",
+            "ikke",
+            "mellom",
+            "en",
+            "å",
+            "vil",
+            "bli",
+            "fra",
+            "allerede",
+            "ee",
+            "mot",
+            "også",
+            "for",
+            "seg",
+            "så",
+            "heller",
+            "som",
+            "et",
+            "om",
+            "hadde",
+            "har",
+            "mer",
+            "de",
+            "sier",
+            "vg",
+            "nrk",
+            "min",
+            "han",
+            "skal",
+            "klokken",
+            "var",
+            "oss",
+            "ett",
+            "ble",
+            "inn",
+            "etter",
+            "over",
+            "andre",
+            "den",
+            "frem",
+            "ut",
+            "får",
+            "dem",
+            "der",
+            "dette",
+            "disse",
+            "hun",
+            "dei",
+            "dokker",
+            "dere",
+            "meg",
+            "deg",
+            "mitt",
+            "mine",
+            "din",
+            "ditt",
+            "dine",
+            "sin",
+            "sitt",
+            "sine",
+            "vår",
+            "vårt",
+            "våre",
+            "deres",
+            "hva",
+            "hvem",
+            "hvilken",
+            "hvilke",
+            "hvor",
+            "hvordan",
+            "hvorfor",
+            "når",
+            "eller",
+            "men",
+            "da",
+            "siden",
+            "under",
+            "før",
+            "hos",
+            "ved",
+            "gjennom",
+            "rundt",
+            "uten",
+            "må",
+            "tips",
+            "pluss",
+            "dagbladet",
+            "dagblad",
+            "skriver",
+            "bør",
+            "nei",
+            "ja",
+            "januar",
+            "februar",
+            "mars",
+            "april",
+            "mai",
+            "juni",
+            "juli",
+            "august",
+            "september",
+            "oktober",
+            "november",
+            "desember",
+            "blir",
+            "hendelse",
+            "hendelsen",
+            "person",
+            "tid",
+            "mandag",
+            "tirsdag",
+            "onsdag",
+            "torsdag",
+            "fredag",
+            "lørdag",
+            "søndag",
+            "nærmeste",
+            "n",
+            "skrev",
+            "hans",
+            "dagbladets",
+            "få",
+            "snakke",
+            "klokka",
+            "fremstår",
+            "meldt",
+            "dreie",
+            "melder",
+            "s",
+            "the",
+            "overy",
+            "of",
+            "res",
+            "nr",
+            "endra",
+            "nov",
+            "frå",
+            "feb",
+            "jan",
+            "aug",
+            "feb",
+            "mar",
+            "apr",
+            "mai",
+            "jun",
+            "sep",
+            "okt",
+            "des",
+            "ein",
+            "utan",
+            "kunngjort",
+            "grunnlovsvedtak",
+            "rett",
+            "eit",
+            "ei",
+            "føyd",
+            "vere",
+            "ho",
+            "ham",
+            "han",
+            "hu",
+            "att",
+            "ledd",
+            "annet",
+            "jf",
+            "gjelder",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+            "æ",
+            "ø",
+            "å",
+            "bokstav",
+            "handling",
+            "lyde",
+            "tilsvarende",
+            "handling",
+            "handlingen",
+            "more",
+            "ago",
+            "replies",
+            "and",
+            "avatar",
+            "it",
+            "is",
+            "its",
+            "that",
+            "in",
+            "this",
+            "one",
+            "no",
+            "show",
+            "rule",
+            "be",
+            "not",
+            "all",
+            "they",
+            "are",
+            "im",
+            "on",
+            "reply",
+            "but",
+            "just",
+            "as",
+            "you",
+            "or",
+            "raskreddit",
+            "like",
+            "my",
+            "so",
+            "best",
+            "share",
+            "only",
+            "about",
+            "time",
+            "than",
+            "have",
+            "remember",
+            "ever",
+            "most",
+            "what",
+            "upvote",
+            "downvote",
+            "by",
+            "could",
+            "if",
+            "think",
+            "there",
+            "know",
+            "måtte",
+            "skulle",
+            "kunne",
+            "ville",
+            "burde",
+            "være",
+            "vært",
+            "ha",
+            "hatt",
+            "blitt",
+            "gjøre",
+            "gjør",
+            "gjorde",
+            "gjort",
+            "fikk",
+            "fått",
+            "ta",
+            "tar",
+            "tok",
+            "tatt",
+            "gå",
+            "går",
+            "gikk",
+            "gått",
+            "komme",
+            "kommer",
+            "kom",
+            "kommet",
+            "se",
+            "ser",
+            "sett",
+            "si",
+            "sa",
+            "sagt",
+            "her",
+            "nå",
+            "herfra",
+            "derfra",
+            "opp",
+            "ned",
+            "fram",
+            "tilbake",
+            "bort",
+            "hjem",
+            "aldri",
+            "alltid",
+            "ofte",
+            "sjelden",
+            "igjen",
+            "jo",
+            "vel",
+            "nok",
+            "bare",
+            "nesten",
+            "ganske",
+            "veldig",
+            "mest",
+            "mindre",
+            "minst",
+            "mye",
+            "mange",
+            "litt",
+            "hele",
+            "alt",
+            "alle",
+            "ingen",
+            "noe",
+            "noen",
+            "egen",
+            "eget",
+            "egne",
+            "samme",
+            "slik",
+            "slikt",
+            "slike",
+            "jeg",
+            "du",
+            "vi",
+            "ham",
+            "henne",
+            "man",
+            "ens",
+            "fordi",
+            "dersom",
+            "mens",
+            "samt",
+            "enten",
+            "både",
+            "hvis",
+            "ifølge",
+            "blant",
+            "innen",
+            "kanskje",
+            "altså",
+            "egentlig",
+            "imidlertid",
+            "dessuten",
+            "likevel",
+            "derfor",
+            "deretter",
+            "visst",
+            "tror",
+            "tro",
+            "mener",
+            "mente",
+            "synes",
+            "syns",
+            "vet",
+            "visste",
+            "gir",
+            "ga",
+            "gitt",
+            "legger",
+            "legge",
+            "lagt",
+            "står",
+            "sto",
+            "stå",
+            "finnes",
+            "fins",
+            "år",
+            "dag",
+            "prosent",
+            "nye",
+            "ny",
+            "nytt",
+            "to",
+            "tre",
+            "fire",
+            "fem",
+            "flere",
+            "flest",
+            "første",
+            "siste",
+            "eg",
+            "ikkje",
+            "me",
+            "kven",
+            "kva",
+            "korleis",
+            "foto",
+            "bekreftet",
+         ];
 
          let words = [];
          let wordsCount = [];
@@ -127,13 +545,14 @@ det var av hvert ord.
                [`${test[7]}`, maxArray[7]],
                [`${test[8]}`, maxArray[8]],
                [`${test[9]}`, maxArray[9]],
+               [`${test[10]}`, maxArray[10]],
             ]);
 
             var options = {
-               legend: "none",
+               // legend: "none",
                pieSliceText: "label",
                title: "",
-               is3D: true,
+               // sliceVisibilityThreshold: 0.05,
             };
 
             var chart = new google.visualization.PieChart(document.getElementById("piechart"));
@@ -153,10 +572,9 @@ det var av hvert ord.
                   <textarea onchange="cleanText(this.value)"></textarea>
                   <button onclick="updateView()">check text</button>
                </div>
-
-               <div id="piechart" style="width: 50%; height: 50vh"></div>
-
+               
                <div class="output column">
+                  <div id="piechart"></div>
                   ${wordOutput}
                </div>
                `;
@@ -180,7 +598,7 @@ det var av hvert ord.
          }
 
          function textToLowerCase() {
-            textContent = textContent.toLowerCase();
+            textContent = textContent.replace(/[\r\n\t]/g, " ").toLowerCase();
          }
 
          function keepAllowedCharacters() {
@@ -214,14 +632,14 @@ det var av hvert ord.
                if (i !== " " && i !== "") {
                   if (count === 0) {
                      tempWords += `
-                           <div id="text-output" class="seperator">
+                           <div class="text-output seperator">
                               <span>${i}</span>
                               <span>${wordsCount[words.indexOf(i)]}</span>
                            </div>`;
                      count++;
                   } else {
                      tempWords += `
-                           <div id="text-output">
+                           <div class="text-output">
                               <span>${i}</span>
                               <span>${wordsCount[words.indexOf(i)]}</span>
                            </div>`;
@@ -233,18 +651,23 @@ det var av hvert ord.
          }
 
          function getDataForPieChart() {
-            for (let i = 0; i < 20; i++) {
-               let highestValue = Math.max(...wordsCount);
-               if (words[wordsCount.indexOf(highestValue)] !== "" && words[wordsCount.indexOf(highestValue)] !== " ") {
+            let tempWords = [...words];
+            let tempCounts = [...wordsCount];
+
+            while (test.length < 20 && tempCounts.length > 0) {
+               let highestValue = Math.max(...tempCounts);
+               let targetIndex = tempCounts.indexOf(highestValue);
+               let currentWord = tempWords[targetIndex];
+
+               if (currentWord && !trashWords.includes(currentWord)) {
                   maxArray.push(highestValue);
-                  test.push(words[wordsCount.indexOf(highestValue)]);
-                  words.splice(wordsCount.indexOf(highestValue), 1);
-                  wordsCount.splice(wordsCount.indexOf(highestValue), 1);
-               } else {
-                  words.splice(wordsCount.indexOf(highestValue), 1);
-                  wordsCount.splice(wordsCount.indexOf(highestValue), 1);
+                  test.push(currentWord);
                }
+
+               tempCounts.splice(targetIndex, 1);
+               tempWords.splice(targetIndex, 1);
             }
+
             console.log(maxArray);
             console.log(test);
          }
