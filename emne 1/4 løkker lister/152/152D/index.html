@@ -53,15 +53,28 @@ det var av hvert ord.
 
          function input() {
             return `
-               <textarea onchange="cleanText(this.value)"></textarea>
-               <button onclick="updateView()">check text</button>
-               <p>${allWords}</p>
+            <textarea onchange="cleanText(this.value)"></textarea>
+            <button onclick="updateView()">check text</button>
+            <h1>textContent</h1>
+            <p>${textContent}</p>
+            <h1>allWords</h1>
+            <p>${allWords}</p>
+            <h1>words</h1>
+            <p>${words}</p>
+            <h1>wordsCount</h1>
+            <p>${wordsCount}</p>
             `;
          }
 
-         function cleanText(text) {
-            textContent = text;
+         function initVariables() {
+            allWords = [];
+            words = [];
+            wordsCount = [];
+         }
 
+         function cleanText(text) {
+            initVariables();
+            textContent = text;
             textToLowerCase();
             keepAllowedCharacters();
             splitText();
@@ -87,18 +100,16 @@ det var av hvert ord.
          }
 
          function removeDuplicates() {
-            let index = 0;
             for (let i of allWords) {
                if (words.includes(i)) {
-                  wordsCount[index]++;
+                  wordsCount[words.indexOf(i)]++;
+                  console.log("if");
                } else {
                   words.push(i);
                   wordsCount.push(1);
-                  console.log(i);
+                  console.log("else");
                }
             }
-            console.log(words);
-            console.log(wordsCount);
          }
       </script>
    </body>
