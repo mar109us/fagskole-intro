@@ -34,9 +34,73 @@ det var av hvert ord.
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
+      <style>
+         * {
+            box-sizing: border-box;
+         }
+
+         body {
+            height: 100vh;
+            margin: 0px;
+            padding: 10px;
+         }
+
+         #app {
+            height: 100%;
+            width: 100%;
+         }
+
+         .input {
+            width: 100%;
+            height: 30%;
+            textarea {
+               width: 80%;
+            }
+            button {
+               width: 20%;
+            }
+         }
+
+         .output {
+            width: 100%;
+            margin-top: 10px;
+            align-items: center;
+         }
+
+         #text-output {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
+         }
+
+         #piechart {
+            padding: 0px;
+            margin: 0px;
+         }
+
+         .seperator {
+            background-color: antiquewhite;
+         }
+
+         .row {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+         }
+
+         .column {
+            display: flex;
+            flex-direction: column;
+         }
+      </style>
    </head>
    <body>
       <div id="app"></div>
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <script>
          const app = document.getElementById("app");
          let textContent = "";
@@ -45,25 +109,57 @@ det var av hvert ord.
 
          let words = [];
          let wordsCount = [];
+         let wordOutput = "";
+
+         let maxArray = [];
+         let test = [];
+
+         function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+               ["", ""],
+               [`${test[0]}`, maxArray[0]],
+               [`${test[1]}`, maxArray[1]],
+               [`${test[2]}`, maxArray[2]],
+               [`${test[3]}`, maxArray[3]],
+               [`${test[4]}`, maxArray[4]],
+               [`${test[5]}`, maxArray[5]],
+               [`${test[6]}`, maxArray[6]],
+               [`${test[7]}`, maxArray[7]],
+               [`${test[8]}`, maxArray[8]],
+               [`${test[9]}`, maxArray[9]],
+            ]);
+
+            var options = {
+               legend: "none",
+               pieSliceText: "label",
+               title: "",
+               is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById("piechart"));
+            chart.draw(data, options);
+         }
 
          function updateView() {
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
             app.innerHTML = input();
          }
          updateView();
 
          function input() {
             return `
-            <textarea onchange="cleanText(this.value)"></textarea>
-            <button onclick="updateView()">check text</button>
-            <h1>textContent</h1>
-            <p>${textContent}</p>
-            <h1>allWords</h1>
-            <p>${allWords}</p>
-            <h1>words</h1>
-            <p>${words}</p>
-            <h1>wordsCount</h1>
-            <p>${wordsCount}</p>
-            `;
+               <div class="input row">
+                  <textarea onchange="cleanText(this.value)"></textarea>
+                  <button onclick="updateView()">check text</button>
+               </div>
+
+               <div id="piechart" style="width: 50%; height: 50vh"></div>
+
+               <div class="output column">
+                  ${wordOutput}
+               </div>
+               `;
          }
 
          function initVariables() {
@@ -79,6 +175,8 @@ det var av hvert ord.
             keepAllowedCharacters();
             splitText();
             removeDuplicates();
+            cleanForOutput();
+            getDataForPieChart();
          }
 
          function textToLowerCase() {
@@ -103,13 +201,52 @@ det var av hvert ord.
             for (let i of allWords) {
                if (words.includes(i)) {
                   wordsCount[words.indexOf(i)]++;
-                  console.log("if");
                } else {
                   words.push(i);
                   wordsCount.push(1);
-                  console.log("else");
                }
             }
+         }
+         function cleanForOutput() {
+            let tempWords = "";
+            let count = 0;
+            for (let i of words) {
+               if (i !== " " && i !== "") {
+                  if (count === 0) {
+                     tempWords += `
+                           <div id="text-output" class="seperator">
+                              <span>${i}</span>
+                              <span>${wordsCount[words.indexOf(i)]}</span>
+                           </div>`;
+                     count++;
+                  } else {
+                     tempWords += `
+                           <div id="text-output">
+                              <span>${i}</span>
+                              <span>${wordsCount[words.indexOf(i)]}</span>
+                           </div>`;
+                     count = 0;
+                  }
+               }
+            }
+            wordOutput = tempWords;
+         }
+
+         function getDataForPieChart() {
+            for (let i = 0; i < 20; i++) {
+               let highestValue = Math.max(...wordsCount);
+               if (words[wordsCount.indexOf(highestValue)] !== "" && words[wordsCount.indexOf(highestValue)] !== " ") {
+                  maxArray.push(highestValue);
+                  test.push(words[wordsCount.indexOf(highestValue)]);
+                  words.splice(wordsCount.indexOf(highestValue), 1);
+                  wordsCount.splice(wordsCount.indexOf(highestValue), 1);
+               } else {
+                  words.splice(wordsCount.indexOf(highestValue), 1);
+                  wordsCount.splice(wordsCount.indexOf(highestValue), 1);
+               }
+            }
+            console.log(maxArray);
+            console.log(test);
          }
       </script>
    </body>
