@@ -65,7 +65,6 @@ det var av hvert ord.
             width: 100%;
             margin-top: 10px;
             align-items: center;
-            justify-content: center;
          }
 
          .text-output {
@@ -80,7 +79,13 @@ det var av hvert ord.
          #piechart {
             padding: 0px;
             margin: 0px;
-            height: 100vh;
+            width: 100%;
+            height: 50vh;
+         }
+
+         #chart_div {
+            padding: 0px;
+            margin: 0px;
             width: 100%;
          }
 
@@ -105,6 +110,9 @@ det var av hvert ord.
 
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <script>
+         google.charts.load("current", { packages: ["corechart", "bar"] });
+         google.charts.setOnLoadCallback(() => {});
+
          const app = document.getElementById("app");
          let textContent = "";
          let allWords = [];
@@ -369,6 +377,90 @@ det var av hvert ord.
             "time",
             "than",
             "have",
+            "was",
+            "with",
+            "do",
+            "their",
+            "your",
+            "from",
+            "out",
+            "his",
+            "he",
+            "when",
+            "them",
+            "will",
+            "had",
+            "other",
+            "would",
+            "who",
+            "she",
+            "him",
+            "her",
+            "he",
+            "an",
+            "na",
+            "some",
+            "thats",
+            "while",
+            "someone",
+            "we",
+            "rwhatisit",
+            "dont",
+            "even",
+            "well",
+            "can",
+            "few",
+            "get",
+            "because",
+            "girl",
+            "boy",
+            "hes",
+            "shes",
+            "mo",
+            "post",
+            "posts",
+            "members",
+            "rinteresting",
+            "interesting",
+            "youre",
+            "your",
+            "yours",
+            "award",
+            "comment",
+            "content",
+            "deleted",
+            "how",
+            "these",
+            "now",
+            "see",
+            "up",
+            "want",
+            "were",
+            "should",
+            "something",
+            "please",
+            "use",
+            "same",
+            "lot",
+            "go",
+            "things",
+            "sub",
+            "any",
+            "got",
+            "around",
+            "theyre",
+            "our",
+            "may",
+            "into",
+            "where",
+            "then",
+            "such",
+            "has",
+            "why",
+            "did",
+            "many",
+            "too",
+            "us",
             "remember",
             "ever",
             "most",
@@ -459,6 +551,14 @@ det var av hvert ord.
             "jeg",
             "du",
             "vi",
+            "comments",
+            "new",
+            "news",
+            "upvotevote",
+            "rpolitics",
+            "another",
+            "here",
+            "again",
             "ham",
             "henne",
             "man",
@@ -525,32 +625,58 @@ det var av hvert ord.
             "bekreftet",
          ];
 
+         let saveValue = "";
          let words = [];
          let wordsCount = [];
          let wordOutput = "";
 
-         let maxArray = [];
-         let test = [];
+         let highestWordIndex = [];
+         let highestWord = [];
 
+         function drawMaterial() {
+            var data = google.visualization.arrayToDataTable([
+               ["", ""],
+               [`${highestWord[0]}`, highestWordIndex[0]],
+               [`${highestWord[1]}`, highestWordIndex[1]],
+               [`${highestWord[2]}`, highestWordIndex[2]],
+               [`${highestWord[3]}`, highestWordIndex[3]],
+               [`${highestWord[4]}`, highestWordIndex[4]],
+               [`${highestWord[5]}`, highestWordIndex[5]],
+               [`${highestWord[6]}`, highestWordIndex[6]],
+               [`${highestWord[7]}`, highestWordIndex[7]],
+               [`${highestWord[8]}`, highestWordIndex[8]],
+               [`${highestWord[9]}`, highestWordIndex[9]],
+               [`${highestWord[10]}`, highestWordIndex[10]],
+               [`${highestWord[11]}`, highestWordIndex[11]],
+               [`${highestWord[12]}`, highestWordIndex[12]],
+               [`${highestWord[13]}`, highestWordIndex[13]],
+               [`${highestWord[14]}`, highestWordIndex[14]],
+               [`${highestWord[15]}`, highestWordIndex[15]],
+            ]);
+
+            var materialOptions = {
+               bars: "vertical",
+            };
+            var materialChart = new google.charts.Bar(document.getElementById("chart_div"));
+            materialChart.draw(data, materialOptions);
+         }
          function drawChart() {
             var data = google.visualization.arrayToDataTable([
                ["", ""],
-               [`${test[0]}`, maxArray[0]],
-               [`${test[1]}`, maxArray[1]],
-               [`${test[2]}`, maxArray[2]],
-               [`${test[3]}`, maxArray[3]],
-               [`${test[4]}`, maxArray[4]],
-               [`${test[5]}`, maxArray[5]],
-               [`${test[6]}`, maxArray[6]],
-               [`${test[7]}`, maxArray[7]],
-               [`${test[8]}`, maxArray[8]],
-               [`${test[9]}`, maxArray[9]],
-               [`${test[10]}`, maxArray[10]],
+               [`${highestWord[0]}`, highestWordIndex[0]],
+               [`${highestWord[1]}`, highestWordIndex[1]],
+               [`${highestWord[2]}`, highestWordIndex[2]],
+               [`${highestWord[3]}`, highestWordIndex[3]],
+               [`${highestWord[4]}`, highestWordIndex[4]],
+               [`${highestWord[5]}`, highestWordIndex[5]],
+               [`${highestWord[6]}`, highestWordIndex[6]],
+               [`${highestWord[7]}`, highestWordIndex[7]],
+               [`${highestWord[8]}`, highestWordIndex[8]],
             ]);
 
             var options = {
                // legend: "none",
-               pieSliceText: "label",
+               pieSliceText: "percent",
                title: "",
                // sliceVisibilityThreshold: 0.05,
             };
@@ -560,21 +686,21 @@ det var av hvert ord.
          }
 
          function updateView() {
-            google.charts.load("current", { packages: ["corechart"] });
-            google.charts.setOnLoadCallback(drawChart);
             app.innerHTML = input();
+            document.getElementById("text-value").value = saveValue;
          }
          updateView();
 
          function input() {
             return `
                <div class="input row">
-                  <textarea onchange="cleanText(this.value)"></textarea>
+                  <textarea id="text-value" onchange="cleanText(this.value)"></textarea>
                   <button onclick="updateView()">check text</button>
                </div>
                
                <div class="output column">
-                  <div id="piechart"></div>
+                     <div id="piechart"></div>
+                     <div id="chart_div"></div>
                   ${wordOutput}
                </div>
                `;
@@ -584,10 +710,14 @@ det var av hvert ord.
             allWords = [];
             words = [];
             wordsCount = [];
+            wordOutput = "";
+            highestWord = [];
+            highestWordIndex = [];
          }
 
          function cleanText(text) {
             initVariables();
+            saveValue = text;
             textContent = text;
             textToLowerCase();
             keepAllowedCharacters();
@@ -654,22 +784,23 @@ det var av hvert ord.
             let tempWords = [...words];
             let tempCounts = [...wordsCount];
 
-            while (test.length < 20 && tempCounts.length > 0) {
+            while (highestWord.length < 20 && tempCounts.length > 0) {
                let highestValue = Math.max(...tempCounts);
                let targetIndex = tempCounts.indexOf(highestValue);
                let currentWord = tempWords[targetIndex];
 
                if (currentWord && !trashWords.includes(currentWord)) {
-                  maxArray.push(highestValue);
-                  test.push(currentWord);
+                  highestWordIndex.push(highestValue);
+                  highestWord.push(currentWord);
                }
 
                tempCounts.splice(targetIndex, 1);
                tempWords.splice(targetIndex, 1);
             }
-
-            console.log(maxArray);
-            console.log(test);
+            drawChart();
+            drawMaterial();
+            console.log(highestWordIndex);
+            console.log(highestWord);
          }
       </script>
    </body>
