@@ -1,11 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-</head>
-<body>
-   asd
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <div id="app"></div>
+   </body>
+   <script>
+      const app = document.getElementById("app");
+
+      let loopSize = 5;
+      let randomArray = [];
+
+      function updateView() {
+         console.log(randomArray);
+         app.innerHTML = createView();
+      }
+      updateView();
+
+      function createView() {
+         return `
+            <button onclick="makeRandomArray(loopSize)">randomize</button>
+            ${randomArray}
+         `;
+      }
+
+      function makeRandomArray(loop) {
+         for (let i = 0; i < loop; i++) {
+            randomArray.push(createRandomNumber());
+         }
+         updateView();
+      }
+
+      function createRandomNumber() {
+         return Math.floor(Math.random() * 5) + 1;
+      }
+   </script>
 </html>
+
+<!-- 
+Funksjon som tar en array av tall som parameter
+Funksjonen returnerer true eller false basert på om listen er sortert eller ikke. 
+Gå gjennom array 1 gang med 1 loop. 
+-->
