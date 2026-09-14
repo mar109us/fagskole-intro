@@ -19,9 +19,10 @@ Legg till pagination med tall -->
 
       let pageArray = [];
       let currentPage = 1;
-      let itemsPerPage = 3;
+      let itemsPerPage = 10;
       let indexFix = 1;
       let page = "";
+      let pagination = ""
 
       function updateView() {
          app.innerHTML = drawView();
@@ -33,6 +34,7 @@ Legg till pagination med tall -->
          let view = `
          <div>current page ${currentPage}</div>
          <div>${page}</div>
+         <div>${pagination}</div>
 
          `;
          return view;
@@ -41,17 +43,25 @@ Legg till pagination med tall -->
       function getData() {
          fillArray();
          getPage();
+         getPagination()
       }
 
       function getPage() {
+         slicePage()
+
+         page = pageArray.map((value) => `<div>${value}</div>`).join("");
+
+         // console.table(pageArray);
+         // console.table(array);
+      }
+
+      function slicePage() {
          pageArray = array.slice(currentPage - indexFix, itemsPerPage);
-         for (let i = 0; i < pageArray.length; i++) {
-            page += `
-            <div>${pageArray[i]}</div>
-            `;
-         }
-         console.table(pageArray);
-         console.table(array);
+
+      }
+
+      function getPagination() {
+         pagination = pageArray.map(value => `<button>${pageArray.indexOf(value) + indexFix}</button>`).join("")
       }
 
       function fillArray() {
