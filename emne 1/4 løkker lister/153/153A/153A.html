@@ -14,25 +14,54 @@ Legg till pagination med tall -->
    <script>
       const app = document.getElementById("app");
       let array = [];
-      let arraySize = 100;
+      let arraySize = 20;
       let numberSize = 10;
 
+      let pageArray = [];
+      let currentPage = 1;
+      let itemsPerPage = 3;
+      let indexFix = 1;
+      let page = "";
+
       function updateView() {
-         app.innerHTML = fillArray();
+         app.innerHTML = drawView();
       }
       updateView();
 
-      function drawView() {}
+      function drawView() {
+         getData();
+         let view = `
+         <div>current page ${currentPage}</div>
+         <div>${page}</div>
+
+         `;
+         return view;
+      }
+
+      function getData() {
+         fillArray();
+         getPage();
+      }
+
+      function getPage() {
+         pageArray = array.slice(currentPage - indexFix, itemsPerPage);
+         for (let i = 0; i < pageArray.length; i++) {
+            page += `
+            <div>${pageArray[i]}</div>
+            `;
+         }
+         console.table(pageArray);
+         console.table(array);
+      }
 
       function fillArray() {
          for (let i = 0; i < arraySize; i++) {
-            let tempNumberOfArray = []
+            let tempNumberOfArray = [];
             for (let j = 0; j < numberSize; j++) {
                tempNumberOfArray += createRandom();
             }
             array.push(tempNumberOfArray);
          }
-         return array;
       }
 
       function createRandom() {
