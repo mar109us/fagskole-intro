@@ -8,13 +8,29 @@ Legg till pagination med tall -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
    </head>
+   <style>
+      .page-container {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+      }
+      .pagination {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: flex-start;
+         gap: 10px;
+      }
+      .page-button {
+         width: 10%;
+      }
+   </style>
    <body>
       <div id="app"></div>
    </body>
    <script>
       const app = document.getElementById("app");
       let array = [];
-      let arraySize = 20;
+      let arraySize = 100;
       let numberSize = 10;
 
       let pageArray = [];
@@ -22,46 +38,61 @@ Legg till pagination med tall -->
       let itemsPerPage = 10;
       let indexFix = 1;
       let page = "";
-      let pagination = ""
+      let pagination = "";
+
+      let pageStartItem = 0
+      let pageEndItem = 10
 
       function updateView() {
          app.innerHTML = drawView();
       }
+      fillArray();
       updateView();
 
       function drawView() {
          getData();
          let view = `
-         <div>current page ${currentPage}</div>
-         <div>${page}</div>
-         <div>${pagination}</div>
+         <div class="page-container">
+            <div class="current-page">current page ${currentPage}</div>
+            <div class"data">${page}</div>
+            <div class="pagination">${pagination}</div>
+         </div>
 
          `;
          return view;
       }
 
       function getData() {
-         fillArray();
          getPage();
-         getPagination()
+         getPagination();
       }
 
       function getPage() {
-         slicePage()
-
+         slicePage();
          page = pageArray.map((value) => `<div>${value}</div>`).join("");
 
-         // console.table(pageArray);
-         // console.table(array);
+         console.table(pageArray);
+         console.table(array);
       }
 
       function slicePage() {
-         pageArray = array.slice(currentPage - indexFix, itemsPerPage);
-
+         pageArray = array.slice(pageStartItem, pageEndItem);
       }
 
       function getPagination() {
-         pagination = pageArray.map(value => `<button>${pageArray.indexOf(value) + indexFix}</button>`).join("")
+         let pageAmount = array.length / itemsPerPage;
+         pagination = ""
+         for (let i = 0; i < pageAmount; i++) {
+            pagination += `<button onclick="changePage(${i})" class="page-button">${i + indexFix}</button>`;
+         }
+      }
+
+      function changePage(index) {
+         pageStartItem = index * itemsPerPage
+         pageEndItem = index * itemsPerPage + itemsPerPage
+         currentPage = index + indexFix
+         console.log(index)
+         updateView()
       }
 
       function fillArray() {
@@ -75,7 +106,7 @@ Legg till pagination med tall -->
       }
 
       function createRandom() {
-         return Math.floor(Math.random() * numberSize);
+         return Math.floor(Math.random() * 10);
       }
    </script>
 </html>
