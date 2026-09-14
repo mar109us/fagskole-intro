@@ -29,19 +29,21 @@ Legg till pagination med tall -->
    </body>
    <script>
       const app = document.getElementById("app");
-      let array = [];
-      let arraySize = 100;
-      let numberSize = 10;
 
-      let pageArray = [];
-      let currentPage = 1;
-      let itemsPerPage = 10;
-      let indexFix = 1;
-      let page = "";
-      let pagination = "";
+      const array = {
+         data: [],
+         size: 100,
+         numberAmount: 10,
+      };
 
-      let pageStartItem = 0
-      let pageEndItem = 10
+      const page = {
+         data: [],
+         current: 1,
+         items: 10,
+         indexFix: 1,
+         startItem: 0,
+         endItem: 10,
+      };
 
       function updateView() {
          app.innerHTML = drawView();
@@ -50,58 +52,51 @@ Legg till pagination med tall -->
       updateView();
 
       function drawView() {
-         getData();
          let view = `
          <div class="page-container">
-            <div class="current-page">current page ${currentPage}</div>
-            <div class"data">${page}</div>
-            <div class="pagination">${pagination}</div>
+            <div class="current-page">current page ${page.current}</div>
+            <div class"data">${getPage()}</div>
+            <div class="pagination">${getPagination()}</div>
          </div>
-
          `;
          return view;
       }
 
-      function getData() {
-         getPage();
-         getPagination();
-      }
-
       function getPage() {
          slicePage();
-         page = pageArray.map((value) => `<div>${value}</div>`).join("");
-
-         console.table(pageArray);
-         console.table(array);
+         console.table(page.data);
+         console.table(array.data);
+         return page.data.map((value) => `<div>${value}</div>`).join("");
       }
 
       function slicePage() {
-         pageArray = array.slice(pageStartItem, pageEndItem);
+         page.data = array.data.slice(page.startItem, page.endItem);
       }
 
       function getPagination() {
-         let pageAmount = array.length / itemsPerPage;
-         pagination = ""
+         let pageAmount = array.data.length / page.items;
+         let pagination = "";
          for (let i = 0; i < pageAmount; i++) {
-            pagination += `<button onclick="changePage(${i})" class="page-button">${i + indexFix}</button>`;
+            pagination += `<button onclick="changePage(${i})" class="page-button">${i + page.indexFix}</button>`;
          }
+         return pagination;
       }
 
       function changePage(index) {
-         pageStartItem = index * itemsPerPage
-         pageEndItem = index * itemsPerPage + itemsPerPage
-         currentPage = index + indexFix
-         console.log(index)
-         updateView()
+         page.startItem = index * page.items;
+         page.endItem = index * page.items + page.items;
+         page.current = index + page.indexFix;
+         console.log(index);
+         updateView();
       }
 
       function fillArray() {
-         for (let i = 0; i < arraySize; i++) {
+         for (let i = 0; i < array.size; i++) {
             let tempNumberOfArray = [];
-            for (let j = 0; j < numberSize; j++) {
+            for (let j = 0; j < array.numberAmount; j++) {
                tempNumberOfArray += createRandom();
             }
-            array.push(tempNumberOfArray);
+            array.data.push(tempNumberOfArray);
          }
       }
 
