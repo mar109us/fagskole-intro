@@ -11,31 +11,67 @@
    <script>
       const app = document.getElementById("app");
 
-      let loopSize = 5;
+      let arraySize = 7;
       let randomArray = [];
+      let sortedArray = [];
+      let completedSorting = [];
+      let complete = false;
+      let arrayAsString = "";
+      let tries = 0;
 
       function updateView() {
-         console.log(randomArray);
          app.innerHTML = createView();
       }
       updateView();
 
       function createView() {
          return `
-            <button onclick="makeRandomArray(loopSize)">randomize</button>
-            ${randomArray}
+            <button onclick="makeRandomArray(arraySize)">randomize</button>
+            <h2>Sorted</h2>
+            ${sortedArray}
+            <h3>Tries: ${tries}</h3>
+            
          `;
       }
+      // ${arrayAsString}
 
-      function makeRandomArray(loop) {
-         for (let i = 0; i < loop; i++) {
-            randomArray.push(createRandomNumber());
+      async function makeRandomArray(loop) {
+         let lastNumber = loop - 1;
+         while (!complete) {
+            let temporaryArray = [];
+            for (let i = 0; i < loop; i++) {
+               let currentNumber = createRandomNumber();
+               temporaryArray.push(currentNumber);
+               if (currentNumber === i + 1) {
+                  completedSorting.push(true);
+               } else {
+                  completedSorting.push(false);
+               }
+               if (i === lastNumber) {
+                  if (completedSorting.includes(false)) {
+                     randomArray.push(temporaryArray);
+                  } else {
+                     complete = true;
+                     sortedArray.push(temporaryArray);
+                  }
+                  // arrayAsString += `${randomArray}`;
+                  randomArray.length = 0;
+                  tries++;
+                  completedSorting.length = 0;
+               }
+            }
+            console.log(temporaryArray);
+            updateView();
+            if (tries % 100000 === 0) {
+            }
+
+            await scheduler.yield();
          }
          updateView();
       }
 
       function createRandomNumber() {
-         return Math.floor(Math.random() * 5) + 1;
+         return Math.floor(Math.random() * arraySize) + 1;
       }
    </script>
 </html>
