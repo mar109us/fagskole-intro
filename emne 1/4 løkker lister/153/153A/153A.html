@@ -1,18 +1,42 @@
 <!-- Lag array med tall
 Legg till pagination med tall -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-</head>
-<body>
-   <div id="app"></div>
-</body>
-<script>
-   const app = document.getElementById("app")
-   
-</script>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+   <body>
+      <div id="app"></div>
+   </body>
+   <script>
+      const app = document.getElementById("app");
+      let array = [];
+      let arraySize = 100;
+      let numberSize = 10;
+
+      function updateView() {
+         app.innerHTML = fillArray();
+      }
+      updateView();
+
+      function drawView() {}
+
+      function fillArray() {
+         for (let i = 0; i < arraySize; i++) {
+            let tempNumberOfArray = []
+            for (let j = 0; j < numberSize; j++) {
+               tempNumberOfArray += createRandom();
+            }
+            array.push(tempNumberOfArray);
+         }
+         return array;
+      }
+
+      function createRandom() {
+         return Math.floor(Math.random() * numberSize);
+      }
+   </script>
 </html>
