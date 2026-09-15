@@ -66,7 +66,7 @@ Legg till pagination med tall -->
          slicePage();
          console.table(page.data);
          console.table(array.data);
-         return page.data.map((value) => `<div>${value}</div>`).join("");
+         return page.data.map((value) => `<div>${value}</div>`).join('');
       }
 
       function slicePage() {
@@ -93,8 +93,11 @@ Legg till pagination med tall -->
       function fillArray() {
          for (let i = 0; i < array.size; i++) {
             let tempNumberOfArray = [];
+            
+            console.log(createRandom())
+
             for (let j = 0; j < array.numberAmount; j++) {
-               tempNumberOfArray += createRandom();
+               tempNumberOfArray.push(createRandom());
             }
             array.data.push(tempNumberOfArray);
          }
