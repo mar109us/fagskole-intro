@@ -14,25 +14,13 @@
 
 // Test-first requirement: Write QUnit tests for the new lowercase rule before updating your function to pass them.
 
-QUnit.test("fix - 'terje'", function (assert) {
+QUnit.test("Uppercase first letter", function (assert) {
    const actual = fixText("terje");
    const expected = "Terje";
    assert.equal(actual, expected);
 });
 
-QUnit.test("fix - 'terje '", function (assert) {
-   const actual = fixText("terje ");
-   const expected = "Terje";
-   assert.equal(actual, expected);
-});
-
-QUnit.test("fix - ' terje'", function (assert) {
-   const actual = fixText(" terje");
-   const expected = "Terje";
-   assert.equal(actual, expected);
-});
-
-QUnit.test("fix - ' terje '", function (assert) {
+QUnit.test("No space before or after", function (assert) {
    const actual = fixText(" terje ");
    const expected = "Terje";
    assert.equal(actual, expected);
