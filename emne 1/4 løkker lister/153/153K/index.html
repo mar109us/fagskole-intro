@@ -88,10 +88,9 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
          return colString;
       }
 
-      // controller (ingenting her ennå)
+      // controller
       function selectBar(barNo) {
-         chosenBar == chosenBar ? chosenBar = undefined : chosenBar = barNo
-         console.log(chosenBar);
+         chosenBar === barNo ? chosenBar = undefined : chosenBar = barNo
          updateView()
       }
 
