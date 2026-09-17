@@ -7,7 +7,7 @@
    </head>
    <body>
       <div id="content"></div>
-      <div>
+      <div style="font-size:10px;">
          <pre>
 
 
@@ -63,7 +63,7 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
          let height = number * 10;
          let y = 60 - height;
          let color = calcColor(1, 10, barNo);
-         return `<rect width="${width}" height="${height}"
+         return `<rect onclick="selectBar(${barNo})" width="${width}" height="${height}"
                             x="${x}" y="${y}" fill="${color}"></rect>`;
       }
 
@@ -76,5 +76,13 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
       }
 
       // controller (ingenting her ennå)
+      function selectBar(barNo) {
+         console.log(barNo)
+
+      }
+
+      function deselectBar() {
+
+      }
    </script>
 </html>
