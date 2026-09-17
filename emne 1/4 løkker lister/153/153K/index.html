@@ -7,7 +7,7 @@
    </head>
    <body>
       <div id="content"></div>
-      <div style="font-size:10px;">
+      <div style="font-size: 10px">
          <pre>
 
 
@@ -40,13 +40,13 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
       function updateView() {
          let svgInnerHtml = "";
          for (let i = 0; i < numbers.length; i++) {
-            svgInnerHtml += createBar(numbers[i], i + 1);
+            svgInnerHtml += createBar(numbers[i], i + 1, chosenBar);
          }
          document.getElementById("content").innerHTML = /*HTML*/ `
             <svg id="chart" width="500" viewBox="0 0 80 60">
                 ${svgInnerHtml}
             </svg><br/>
-            Valgt stolpe: <i>ingen</i>
+            Valgt stolpe: <i>${chosenBar ? chosenBar : "ingen"}</i>
             <br />
             Verdi:
             <input type="number" min="1" max="10" oninput="inputValue = this.value" />
@@ -56,15 +56,28 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
         `;
       }
 
-      function createBar(number, barNo) {
+      function createBar(number, barNo, selected) {
          const width = 8;
          const spacing = 2;
          let x = (barNo - 1) * (width + spacing);
          let height = number * 10;
          let y = 60 - height;
          let color = calcColor(1, 10, barNo);
-         return `<rect onclick="selectBar(${barNo})" width="${width}" height="${height}"
-                            x="${x}" y="${y}" fill="${color}"></rect>`;
+         let drawStroke = "none"
+         if (selected === barNo) {
+            drawStroke = "black"
+         }
+         return `
+         <rect 
+         onclick="selectBar(${barNo})"
+         width="${width}"
+         height="${height}"
+         x="${x}"
+         y="${y}"
+         fill="${color}"
+         stroke="${drawStroke}"
+         stroke-width="0.3">
+         </rect>`;
       }
 
       function calcColor(min, max, val) {
@@ -77,12 +90,11 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
 
       // controller (ingenting her ennå)
       function selectBar(barNo) {
-         console.log(barNo)
-
+         chosenBar == chosenBar ? chosenBar = undefined : chosenBar = barNo
+         console.log(chosenBar);
+         updateView()
       }
 
-      function deselectBar() {
-
-      }
+      function deselectBar() {}
    </script>
 </html>
