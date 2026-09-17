@@ -4,6 +4,14 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
+      <style>
+         svg {
+            padding: 5px;
+         }
+         bar {
+            margin: 5px;
+         }
+      </style>
    </head>
    <body>
       <div id="content"></div>
@@ -12,12 +20,12 @@
 
 
 
-<b>Velg stolpe:   Klikk for å velge/avvelge. 
+<strike>Velg stolpe:   Klikk for å velge/avvelge. 
                Valgt stolpe får svart ramme og teksten 
-               "Valgt stolpe: [id]".</b>
+               "Valgt stolpe: [id]".</strike>
 
-Knappestatus:  "Endre valgt stolpe" og "Fjerne valgt stolpe" er 
-               kun aktive når en stolpe er valgt.
+<b>Knappestatus:  "Endre valgt stolpe" og "Fjerne valgt stolpe" er 
+               kun aktive når en stolpe er valgt.</b>
 
 Fjerne:        Sletter den valgte stolpen fra listen.
 
@@ -31,10 +39,14 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
    </body>
    <script>
       // model
-      let numbers = [7, 3, 1, 5, 8];
+      let numbers = [7, 3, 1, 5, 10];
       let chosenBar; // Variabel for hvilken stolpe som er valgt
       let inputValue; // Variabel for hva som er skrevet i input-feltet
 
+      window.addEventListener("click", (click) => {
+         console.log(click)
+         click.target.id !== "bar" ? deselectBar() : null
+      })
       // view
       updateView();
       function updateView() {
@@ -57,11 +69,11 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
       }
 
       function createBar(number, barNo, selected) {
-         const width = 8;
+         const width = 7;
          const spacing = 2;
-         let x = (barNo - 1) * (width + spacing);
-         let height = number * 10;
-         let y = 60 - height;
+         let x = (barNo - 1) * (width + spacing) + 4;
+         let height = number * 5.9;
+         let y = 61 - height;
          let color = calcColor(1, 10, barNo);
          let drawStroke = "none"
          if (selected === barNo) {
@@ -69,6 +81,8 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
          }
          return `
          <rect 
+         id="bar"
+         class="bar"
          onclick="selectBar(${barNo})"
          width="${width}"
          height="${height}"
@@ -94,6 +108,9 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
          updateView()
       }
 
-      function deselectBar() {}
+      function deselectBar() {
+         chosenBar = undefined
+         updateView()
+      }
    </script>
 </html>
