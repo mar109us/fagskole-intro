@@ -42,11 +42,12 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
       let numbers = [7, 3, 1, 5, 10];
       let chosenBar; // Variabel for hvilken stolpe som er valgt
       let inputValue; // Variabel for hva som er skrevet i input-feltet
+      let editButtonsState = "disabled";
 
       window.addEventListener("click", (click) => {
-         console.log(click)
-         click.target.id !== "bar" ? deselectBar() : null
-      })
+         click.target.id !== "bar" ? deselectBar() : null;
+      });
+
       // view
       updateView();
       function updateView() {
@@ -63,8 +64,8 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
             Verdi:
             <input type="number" min="1" max="10" oninput="inputValue = this.value" />
             <button>Legg til stolpe</button>
-            <button disabled>Endre valgt stolpe</button><br />
-            <button disabled>Fjerne valgt stolpe</button>
+            <button ${editButtonsState}>Endre valgt stolpe</button><br />
+            <button ${editButtonsState} onclick="removeBar()">Fjerne valgt stolpe</button>
         `;
       }
 
@@ -75,12 +76,12 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
          let height = number * 5.9;
          let y = 61 - height;
          let color = calcColor(1, 10, barNo);
-         let drawStroke = "none"
+         let drawStroke = "none";
          if (selected === barNo) {
-            drawStroke = "black"
+            drawStroke = "black";
          }
          return `
-         <rect 
+         <rect
          id="bar"
          class="bar"
          onclick="selectBar(${barNo})"
@@ -104,13 +105,25 @@ Legg til:      Legger til ny stolpe sist i listen med input-verdi (1-10).
 
       // controller
       function selectBar(barNo) {
-         chosenBar === barNo ? chosenBar = undefined : chosenBar = barNo
-         updateView()
+         chosenBar === barNo ? (chosenBar = undefined) : (chosenBar = barNo);
+         toggleEditButtons();
+         updateView();
       }
 
       function deselectBar() {
-         chosenBar = undefined
-         updateView()
+         chosenBar = undefined;
+         toggleEditButtons();
+         updateView();
+      }
+
+      function toggleEditButtons() {
+         chosenBar === undefined ? (editButtonsState = "disabled") : (editButtonsState = "");
+      }
+
+      function removeBar() {
+         numbers.splice(chosenBar - 1, 1);
+         numbers = [...numbers];
+         console.log("remove", chosenBar);
       }
    </script>
 </html>
