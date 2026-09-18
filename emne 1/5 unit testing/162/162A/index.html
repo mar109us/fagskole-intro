@@ -19,16 +19,9 @@
    <script>
       // model
       let numbers = [7, 3, 1, 5, 10];
-      let chosenBar; // Variabel for hvilken stolpe som er valgt
-      let inputValue; // Variabel for hva som er skrevet i input-feltet
+      let chosenBar;
+      let inputValue;
       let editButtonsState = "disabled";
-
-      window.addEventListener("click", (click) => {
-         // console.log(click)
-         if (click.target.id !== "bar" && click.target.localName !== "button" && click.target.localName !== "input") {
-            deselectBar();
-         }
-      });
 
       // view
       updateView();
@@ -131,5 +124,11 @@
          deselectBar();
          updateView();
       }
+
+      window.addEventListener("click", (click) => {
+         if (click.target.id !== "bar" && click.target.localName !== "button" && click.target.localName !== "input") {
+            deselectBar();
+         }
+      });
    </script>
 </html>
