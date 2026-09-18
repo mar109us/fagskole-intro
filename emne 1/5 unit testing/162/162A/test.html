@@ -7,25 +7,15 @@
       <div id="qunit"></div>
       <div id="qunit-fixture"></div>
       <script src="https://code.jquery.com/qunit/qunit-2.26.0.js"></script>
-      <script src="main.js"></script>
-      <script src="test.js"></script>
       <script>
          QUnit.done(function () {
-            let header = document.querySelector("#qunit-header");
-            header.remove();
-
-            let banner = document.querySelector("#qunit-banner");
-            banner.remove();
-
-            let device = document.querySelector("#qunit-userAgent");
-            device.remove();
-         });
-
-         QUnit.test("Positive: Contains '.' after '@'", function (assert) {
-            const test = checkEmail("asd@asd.com");
-            const expected = "@.";
-            assert.equal(test, expected);
+            document.querySelector("#qunit-header").remove();
+            document.querySelector("#qunit-banner").remove();
+            document.querySelector("#qunit-userAgent").remove();
+            document.querySelector("#qunit-testrunner-toolbar").remove();
+            document.querySelector("#qunit-testresult").remove();
          });
       </script>
+      <script src="test.js"></script>
    </body>
 </html>
